@@ -1,32 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.torrent;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Admin
- */
 public class MainTest {
-    
-    
-    
-    
+
     @Test
-    public void testMain() {
-        String[] args = null;
+    public void testMain() throws BadArgumentsException {
+        String[] args = {"1", "127.0.0.1:20201"};
         Main.main(args);
         assertTrue(true);
-       
     }
-    
+
 }
