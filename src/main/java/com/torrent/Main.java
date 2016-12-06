@@ -6,7 +6,7 @@ public class Main {
         ArgsParser argsParser = new ArgsParser();
         argsParser.parse(args);
         if (argsParser.getMode() == ArgsParser.CLIENT_MODE) {
-            Client.run();
+            Client.run(argsParser.getFilePath());
         } else {
             Server.run();
         }
