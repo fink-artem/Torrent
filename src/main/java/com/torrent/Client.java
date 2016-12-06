@@ -1,9 +1,17 @@
 package com.torrent;
 
-public class Client {
+import java.io.IOException;
 
-    static void run(){
-        
+public class Client {
+   
+
+    static void run(String path) throws BadArgumentsException{
+        try {
+            TorrentParser torrentParser = new TorrentParser(path);
+        } catch (IOException ex) {
+            throw new BadArgumentsException();
+        }
+     
     }
     
 }
