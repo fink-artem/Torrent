@@ -19,27 +19,15 @@ public class QueueDownloader {
     private final int end = -1;
     private final Object monitor = new Object();
     private FileWriter out = null;
-    private String client = "./client/";
+    private final String client = "./client/";
 
     public QueueDownloader(List<InetSocketAddress> ipList, int numberPieces, InetSocketAddress myHost) {
-        String path = client + "client" + myHost.getHostName() + "/";
-        File myPath = new File(path);
-        myPath.mkdirs();
-        this.ipList = ipList;
         for (int i = 0; i < numberPieces; i++) {
             pieceList.add(i);
         }
-        try (Scanner reader = new Scanner(new FileInputStream(path + "data.txt"))) {
-            while (reader.hasNext()) {
-                pieceList.remove((Integer) reader.nextInt());
-            }
-        } catch (FileNotFoundException ex) {
-        }
+        this.ipList = ipList;
         length = pieceList.size();
-        try {
-            out = new FileWriter(path + "data.txt", true);
-        } catch (IOException ex) {
-        }
+        
     }
 
     int getPiece() {
