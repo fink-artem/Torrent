@@ -19,10 +19,9 @@ import java.util.Set;
 
 public class Server {
 
-    static void run() {
-        int poisk = my_host.indexOf(":");
+    static void run(InetSocketAddress myHost, TorrentParser par) {
         try (Selector selector = Selector.open(); ServerSocketChannel serverSocketChannel = ServerSocketChannel.open(); ServerSocket serverSocket = serverSocketChannel.socket();) {
-            serverSocket.bind(new InetSocketAddress(Integer.parseInt(my_host.substring(poisk + 1))));
+            serverSocket.bind(new InetSocketAddress(myHost.getPort()));
             serverSocketChannel.configureBlocking(false);
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
             while (true) {
@@ -45,7 +44,7 @@ public class Server {
                         try {
                             SocketChannel socketChannel = (SocketChannel) key.channel();
                             int piece;
-                            int length_piece = r.getPieces_Length();
+                            int length_piece = par.getPiecesLength();
                             System.out.println(length_piece);
                             byte buffer[] = new byte[length_piece];
                             ByteBuffer sharedBuffer = ByteBuffer.allocate(length_piece);
