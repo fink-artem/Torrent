@@ -8,7 +8,7 @@ public class Main {
         if (argsParser.getMode() == ArgsParser.CLIENT_MODE) {
             Client.run(argsParser.getFilePath());
         } else {
-            Server.run();
+            Server.run(argsParser.getMyHost());
         }
     }
 }
