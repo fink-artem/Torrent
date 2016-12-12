@@ -7,7 +7,7 @@ public class Main {
         argsParser.parse(args);
         TorrentParser torrentParser = new TorrentParser(argsParser.getFilePath());
         if (argsParser.getMode() == ArgsParser.CLIENT_MODE) {
-            Client.run(argsParser.getFilePath());
+             Client.run(argsParser, torrentParser);
         } else {
             Server.run(argsParser.getMyHost(),torrentParser);
         }
