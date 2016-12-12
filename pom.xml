@@ -14,7 +14,7 @@
         <repository>
             <id>bee-encode</id>
             <name>Local Repo</name>
-            <url>file://C:/Users/Admin/Documents/NetBeansProjects/Torrent/lib</url>
+            <url>file://./lib</url>
         </repository>
     </repositories>
     <dependencies>
