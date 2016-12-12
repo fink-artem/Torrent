@@ -12,7 +12,7 @@ public class Client {
 
     static void run(ArgsParser argsParser, TorrentParser torrentParser) {
 
-        QueueDownloader queueDownloader = queueDownloader = new QueueDownloader(argsParser.getListIp(), torrentParser.getNumberPieces(), argsParser.getMyHost());
+        QueueDownloader queueDownloader  = new QueueDownloader(argsParser.getListIp(), torrentParser.getNumberPieces(), argsParser.getMyHost());
         String path = CLIENT + "client" + argsParser.getMyHost().getHostName() + "/";
         Downloader downloader = new Downloader(queueDownloader, torrentParser.getPieces(), torrentParser.getPiecesLength(), torrentParser.getAllLength(), path);
         downloader.run();
