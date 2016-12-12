@@ -1,16 +1,14 @@
 package com.torrent;
 
-import java.io.IOException;
 
 public class Client {
    
 
-    static void run(String path) throws BadArgumentsException{
-        try {
-            TorrentParser torrentParser = new TorrentParser(path);
-        } catch (IOException ex) {
-            throw new BadArgumentsException();
-        }
+    static void run(ArgsParser argsParser, TorrentParser torrentParser){
+       
+        QueueDownloader queueDownloader;
+        queueDownloader = new QueueDownloader(argsParser.getListIp(), torrentParser.getNumberPieces(),argsParser.getMyHost());
+       
      
     }
     
