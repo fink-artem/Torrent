@@ -14,7 +14,7 @@
         <repository>
             <id>bee-encode</id>
             <name>Local Repo</name>
-            <url>file://./lib</url>
+            <url>https://github.com/AlinaKapustina/Torrent/blob/master/lib/bee-encode-0.2.jar</url>
         </repository>
     </repositories>
     <dependencies>
@@ -24,8 +24,8 @@
             <version>4.12</version>
         </dependency>
         <dependency>
-            <groupId>bee-encode</groupId>
-            <artifactId>bee-encode</artifactId>
+            <groupId> bee-encode</groupId>
+            <artifactId> bee-encode</artifactId>
             <version>0.2</version>
         </dependency>
     </dependencies>
