@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ArgsParser {
 
-    private static final int MIN_ARGS_LENGTH = 2;
+    private static final int MIN_ARGS_LENGTH = 3;
     private static final int MIN_CLIENT_ARGS_LENGTH = 4;
     public static final int CLIENT_MODE = 0;
     public static final int SERVER_MODE = 1;
@@ -38,11 +38,11 @@ public class ArgsParser {
 
     private void parseClientArgs(String[] args) throws BadArgumentsException {
         myHost = parseAddress(args[1]);
-        if (args.length < MIN_CLIENT_ARGS_LENGTH) {
-            throw new BadArgumentsException();
-        }
         filePath = args[2];
         if (!filePath.endsWith(".torrent")) {
+            throw new BadArgumentsException();
+        }
+        if (args.length < MIN_CLIENT_ARGS_LENGTH) {
             throw new BadArgumentsException();
         }
         listIp = new ArrayList<>();
@@ -52,7 +52,11 @@ public class ArgsParser {
     }
 
     private void parseServerArgs(String[] args) throws BadArgumentsException {
-        parseAddress(args[1]);
+        myHost = parseAddress(args[1]);
+        filePath = args[2];
+        if (!filePath.endsWith(".torrent")) {
+            throw new BadArgumentsException();
+        }
     }
 
     private InetSocketAddress parseAddress(String address) throws BadArgumentsException {
