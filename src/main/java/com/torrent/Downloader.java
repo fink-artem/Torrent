@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class Downloader {
+public class Downloader implements Runnable{
 
     private final QueueDownloader queue;
     private final List<String> pieces;
@@ -30,7 +30,8 @@ public class Downloader {
         this.lastLengthPiece = length - this.numberPiece * lengthPiece;
     }
 
-    void run(){
+    @Override
+    public void run(){
         InetSocketAddress ip_downloader = queue.getIP();
         int piece;
         int count = 0;
