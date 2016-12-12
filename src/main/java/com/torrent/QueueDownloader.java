@@ -13,29 +13,29 @@ import java.util.Scanner;
 
 public class QueueDownloader {
 
-    private final List<InetSocketAddress> ip_list;
-    private List<Integer> piece_list = new ArrayList<>();
+    private final List<InetSocketAddress> ipList;
+    private List<Integer> pieceList = new ArrayList<>();
     private int length;
     private final int end = -1;
     private final Object monitor = new Object();
     private FileWriter out = null;
     private String client = "./client/";
 
-    public QueueDownloader(List<InetSocketAddress> ip_list, int number_pieces, InetSocketAddress my_host) {
-        String path = client + "client" + my_host.getHostName() + "/";
+    public QueueDownloader(List<InetSocketAddress> ipList, int numberPieces, InetSocketAddress myHost) {
+        String path = client + "client" + myHost.getHostName() + "/";
         File myPath = new File(path);
         myPath.mkdirs();
-        this.ip_list = ip_list;
-        for (int i = 0; i < number_pieces; i++) {
-            piece_list.add(i);
+        this.ipList = ipList;
+        for (int i = 0; i < numberPieces; i++) {
+            pieceList.add(i);
         }
         try (Scanner reader = new Scanner(new FileInputStream(path + "data.txt"))) {
             while (reader.hasNext()) {
-                piece_list.remove((Integer) reader.nextInt());
+                pieceList.remove((Integer) reader.nextInt());
             }
         } catch (FileNotFoundException ex) {
         }
-        length = piece_list.size();
+        length = pieceList.size();
         try {
             out = new FileWriter(path + "data.txt", true);
         } catch (IOException ex) {
@@ -48,8 +48,8 @@ public class QueueDownloader {
             if (0 == length) {
                 return end;
             } else {
-                work = piece_list.get(0);
-                piece_list.remove(0);
+                work = pieceList.get(0);
+                pieceList.remove(0);
                 length--;
             }
         }
@@ -58,7 +58,7 @@ public class QueueDownloader {
 
     InetSocketAddress getIP() {
         Random r = new Random();
-        return ip_list.get(r.nextInt(ip_list.size()));
+        return ipList.get(r.nextInt(ipList.size()));
     }
 
     void setPiece(int piece) {
