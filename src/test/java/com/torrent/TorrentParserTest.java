@@ -57,4 +57,14 @@ public class TorrentParserTest {
             throw  new BadArgumentsException();
         }
     }
+    @Test
+    public void testManyFiles() throws BadArgumentsException {
+        String path = "data.torrent";
+        try {
+            TorrentParser torrentParser = new TorrentParser(path);
+            assertTrue(torrentParser.getName().size() == 7);
+        } catch (IOException ex) {
+            throw  new BadArgumentsException();
+        }
+    }
 }
