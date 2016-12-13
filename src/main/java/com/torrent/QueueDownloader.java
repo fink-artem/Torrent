@@ -22,12 +22,24 @@ public class QueueDownloader {
     private final String client = "./client/";
 
     public QueueDownloader(List<InetSocketAddress> ipList, int numberPieces, InetSocketAddress myHost) {
+        String path = client + "client" + myHost + "/";
+        File myPath = new File(path);
+        myPath.mkdirs();
+        this.ipList = ipList;
         for (int i = 0; i < numberPieces; i++) {
             pieceList.add(i);
         }
-        this.ipList = ipList;
+        try (Scanner reader = new Scanner(new FileInputStream(path + "data.txt"))) {
+            while (reader.hasNext()) {
+                pieceList.remove((Integer) reader.nextInt());
+            }
+        } catch (FileNotFoundException ex) {
+        }
         length = pieceList.size();
-        
+        try {
+            out = new FileWriter(path + "data.txt", true);
+        } catch (IOException ex) {
+        }
     }
 
     int getPiece() {
