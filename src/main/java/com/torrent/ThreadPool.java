@@ -1,14 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.torrent;
 
-/**
- *
- * @author Admin
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class ThreadPool {
+
+    private final List<Thread> workers;
+    private final int numWorkers;
+
+    public ThreadPool(int numWorkers, QueueDownloader queue, List<String> pieces, int lengthPiece, int length, String path) {
+        this.numWorkers = numWorkers;
+        workers = new ArrayList<>(numWorkers);
+        for (int i = 0; i < numWorkers; i++) {
+            Thread worker = new Thread(new Downloader(queue, pieces, lengthPiece, length, path));
+            workers.add(worker);
+            worker.start();
+        }
+    }
     
+    void joinAll(){
+        for (int i = 0; i < numWorkers; i++) {
+            try {
+                workers.get(i).join();
+            } catch (InterruptedException ex) {
+            }
+        }
+    }
 }
