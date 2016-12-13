@@ -19,10 +19,10 @@ public class QueueDownloader {
     private final int end = -1;
     private final Object monitor = new Object();
     private FileWriter out = null;
-    private String client = "./client/";
+    private final String client = "./client/";
 
     public QueueDownloader(List<InetSocketAddress> ipList, int numberPieces, InetSocketAddress myHost) {
-        String path = client + "client" + myHost.getHostName() + "/";
+        String path = client + "client" + myHost + "/";
         File myPath = new File(path);
         myPath.mkdirs();
         this.ipList = ipList;
