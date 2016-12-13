@@ -38,6 +38,16 @@ public class TorrentParserTest {
         }
     }
     @Test
+    public void testBadArgument() throws BadArgumentsException {
+        String path = "data_orrent.torrent";
+        try {
+            TorrentParser torrentParser = new TorrentParser(path);
+            
+        } catch (IOException ex) {
+            assertTrue(true);
+        }
+    }
+    @Test
     public void testNumberFiles() throws BadArgumentsException {
         String path = "data_torrent.torrent";
         try {

@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.ardverk.coding.*;
-
+/***
+ * 
+ * Парсит торрент файл
+ */
 public class TorrentParser {
   
     private List<String> name = new ArrayList<>();
@@ -20,7 +23,11 @@ public class TorrentParser {
     private final List<String> list_pieces = new ArrayList<>();
     private final int length_hash = 20;
     private int number_files;
-
+/***
+ * 
+ * @param path путь до торрент файла
+ * @throws IOException  неверный формат торрент файла
+ */
     TorrentParser(String path) throws IOException {
         try (BencodingInputStream in = new BencodingInputStream(new FileInputStream(path))) {
             Map<String, ?> s = in.readMap();
@@ -49,30 +56,53 @@ public class TorrentParser {
         } catch (FileNotFoundException ex) {
         }
     }
-
+/***
+ * 
+ * @return  получить имя скачиваемого файла
+ */
     List<String> getName() {
         return name;
     }
-
+/***
+ * 
+ * @return получить длину кусков скачиваемого файла
+ */
     List<Integer> getLength() {
         return length;
     }
-
+/***
+ * 
+ * @return получить длину одного куска
+ */
     int getPiecesLength() {
         return piece_length;
     }
-
+/***
+ * 
+ * @return получить список кусков файла
+ */
     List<String> getPieces() {
         return list_pieces;
     }
-
+/***
+ * 
+ * @return получить количество кусков
+ */
     int getNumberPieces() {
         return number_pieces;
     }
-
+/***
+ * 
+ * @return получить номер файла
+ */
+    
     int getNumberFiles() {
         return number_files;
     }
+/***
+ * 
+ * @return получить общую длину
+ */  
     
     int getAllLength(){
         return all_length;

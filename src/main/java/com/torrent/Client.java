@@ -5,11 +5,19 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.util.List;
-
+/***
+ * 
+ *Торрент клиент
+ */
 public class Client {
 
     private static final String CLIENT = "./client/";
-
+/**
+ * Клиент запускает загрузку файла, передаваемого его в параметры
+ * @param argsParser объект класса ArgsParser, содержащий в себе ip адреса серверов
+ * @param torrentParser объект класса TorrentParser, содержащий в себе распарсенный torrent файл.
+ */
+    
     static void run(ArgsParser argsParser, TorrentParser torrentParser) {
 
         QueueDownloader queueDownloader  = new QueueDownloader(argsParser.getListIp(), torrentParser.getNumberPieces(), argsParser.getMyHost());

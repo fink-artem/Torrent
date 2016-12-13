@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-
+/***
+ * Очередь загрузчиков
+ *
+ */
 public class QueueDownloader {
 
     private final List<InetSocketAddress> ipList;
@@ -20,7 +23,12 @@ public class QueueDownloader {
     private final Object monitor = new Object();
     private FileWriter out = null;
     private final String client = "./client/";
-
+/***
+ * 
+ * @param ipList список ip адресов, у которых можно скачивать файл
+ * @param numberPieces количество кусков для скачивания
+ * @param myHost номер хоста клиента, который скачивает
+ */
     public QueueDownloader(List<InetSocketAddress> ipList, int numberPieces, InetSocketAddress myHost) {
         String path = client + "client" + myHost + "/";
         File myPath = new File(path);
@@ -41,7 +49,10 @@ public class QueueDownloader {
         } catch (IOException ex) {
         }
     }
-
+/***
+ * 
+ * @return номер куска для скачивания
+ */
     int getPiece() {
         int work;
         synchronized (monitor) {
@@ -55,12 +66,22 @@ public class QueueDownloader {
         }
         return work;
     }
-
+/***
+ * 
+ * @return получить рандомный адрес для скачивания
+ */
+    
+     
     InetSocketAddress getIP() {
         Random r = new Random();
         return ipList.get(r.nextInt(ipList.size()));
     }
-
+/***
+ * Записывает в выходной поток номер скаченного куска
+ * @param piece номер куска
+ * 
+ */
+    
     void setPiece(int piece) {
         synchronized (monitor) {
             try {

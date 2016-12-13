@@ -10,7 +10,10 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
-
+/***
+ * 
+ * Класс загрузчик
+ */
 public class Downloader implements Runnable{
 
     private final QueueDownloader queue;
@@ -20,7 +23,14 @@ public class Downloader implements Runnable{
     private final int numberPiece;
     private final int lastLengthPiece;
     private final String path;
-
+/***
+ * 
+ * @param queue очередь ip адресов, у которых можно скачивать
+ * @param pieces список кусков для скачивания
+ * @param length_piece длина каждого куска
+ * @param length общая длина
+ * @param path  путь к файлу
+ */
     public Downloader(QueueDownloader queue, List<String> pieces, int length_piece, int length, String path) {
         this.path = path;
         this.queue = queue;
@@ -29,7 +39,9 @@ public class Downloader implements Runnable{
         this.numberPiece = pieces.size() - 1;
         this.lastLengthPiece = length - this.numberPiece * lengthPiece;
     }
-
+/***
+ * Запускает скачивание и запись файла
+ */
     @Override
     public void run(){
         InetSocketAddress ip_downloader = queue.getIP();

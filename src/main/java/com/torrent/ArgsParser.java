@@ -4,6 +4,11 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * Класс ArgsParser парсит аргументы
+ * 
+ */
+
 public class ArgsParser {
 
     private static final int MIN_ARGS_LENGTH = 3;
@@ -14,7 +19,12 @@ public class ArgsParser {
     private InetSocketAddress myHost;
     private String filePath;
     private List<InetSocketAddress> listIp;
-
+    
+/***
+ * Функция парсит аргументы и определяет, какой режим запущен
+ * @param args аргументы
+ * @throws BadArgumentsException  неверное количество аргументов, неверный формат аргументов, неверное значение типа
+ */
     public void parse(String[] args) throws BadArgumentsException {
         if (args.length < MIN_ARGS_LENGTH) {
             throw new BadArgumentsException();
@@ -35,7 +45,12 @@ public class ArgsParser {
                 throw new BadArgumentsException();
         }
     }
-
+/***
+ * Функции парсит аргументы клиента
+ * @param args аргументы клиента
+ * @throws BadArgumentsException файл, представленный в документах, имеет формат, отличный от .torrent
+ * или неверное количество аргументов
+ */
     private void parseClientArgs(String[] args) throws BadArgumentsException {
         myHost = parseAddress(args[1]);
         filePath = args[2];
@@ -50,7 +65,11 @@ public class ArgsParser {
             listIp.add(parseAddress(args[i]));
         }
     }
-
+/***
+ * Функция парсит аргументы сервера
+ * @param args аргументы с режимом 1
+ * @throws BadArgumentsException  файл, представленный в документах, имеет формат, отличный от .torrent
+ */
     private void parseServerArgs(String[] args) throws BadArgumentsException {
         myHost = parseAddress(args[1]);
         filePath = args[2];
@@ -58,7 +77,13 @@ public class ArgsParser {
             throw new BadArgumentsException();
         }
     }
-
+/**
+ * 
+ * @param address адрес формата xxx.xxx.xxx.xxxx:xxxx
+ * @return класс inetSocketAddress
+ * @throws BadArgumentsException 
+ * возможная ошибка - неправильный формат входных данных,
+ */
     private InetSocketAddress parseAddress(String address) throws BadArgumentsException {
         int search = address.indexOf(":");
         InetSocketAddress inetSocketAddress = null;
@@ -71,19 +96,31 @@ public class ArgsParser {
         }
         return inetSocketAddress;
     }
-
+/***
+ * 
+ * @return тип (Клиент или Сервер)
+ */
     public int getMode() {
         return mode;
     }
-
+/***
+ * 
+ * @return номер хоста
+ */
     public InetSocketAddress getMyHost() {
         return myHost;
     }
-
+/***
+ * 
+ * @return путь к файлу
+ */
     public String getFilePath() {
         return filePath;
     }
-
+/***
+ * 
+ * @return  список ip адресов для клиента
+ */
     public List<InetSocketAddress> getListIp() {
         return listIp;
     }

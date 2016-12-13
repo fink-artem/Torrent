@@ -16,9 +16,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
+/***
+ * Торрент сервер
+ * 
+ */
 
 public class Server {
-
+/***
+ * 
+ * @param myHost номер хоста, на котором находится сервер
+ * @param par объект  TorrentParser 
+ */
+    
     static void run(InetSocketAddress myHost, TorrentParser par) {
         try (Selector selector = Selector.open(); ServerSocketChannel serverSocketChannel = ServerSocketChannel.open(); ServerSocket serverSocket = serverSocketChannel.socket();) {
             serverSocket.bind(new InetSocketAddress(myHost.getPort()));
